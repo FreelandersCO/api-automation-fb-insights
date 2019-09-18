@@ -36,7 +36,7 @@ class ConversationApp(object):
         page_id = page_data.id_page
         page_token = page_data.token
         graph = facebook.GraphAPI(access_token=page_token, version=VERSION)
-        args = {'fields' : 'id,message_count,updated_time,link,messages.limit(100){id,from,message,sticker,created_time,attachments{id,image_data,mime_type,name,size,video_data,file_url},tags,to,shares}','limit':25}  #requested fields
+        args = {'fields' : 'id,message_count,updated_time,link,messages.limit(100){id,from,message,sticker,created_time}','limit':25}  #requested fields
         conv = graph.get_object(page_id+'/conversations', **args)
         # print(conv)
         # Wrap this block in a while loop so we can keep paginating requests until
@@ -79,6 +79,7 @@ class ConversationApp(object):
                 break
 
     def message_process(self, conversation_id, message_data):
+        print(conversation_id)
         for message in message_data :
             data_to_database = {}
             data_to_database['message_id'] = message['id']
@@ -86,8 +87,16 @@ class ConversationApp(object):
             data_to_database['from_id'] = message['from']['id']
             data_to_database['from_name'] = message['from']['name']
             data_to_database['from_email'] = message['from']['email']
-            data_to_database['message'] = message['message']
-            data_to_database['sticker'] = message['sticker']
+            try:
+                msn=message['message']
+            except:
+                msn=''
+            try:
+                strk=message['sticker']
+            except:
+                strk=''
+            data_to_database['message'] = msn
+            data_to_database['sticker'] = strk
             data_to_database['message_created_time'] = message['created_time']
             self.database.insert('message',data_to_database)
             del data_to_database

@@ -224,7 +224,7 @@ CREATE UNLOGGED TABLE IF NOT EXISTS post_data (
 CREATE UNLOGGED TABLE IF NOT EXISTS post_comment_data (
   comment_id TEXT NOT NULL,
   post_id TEXT NOT NULL,
-  message TEXT NULL,
+  message TEXT,
   comment_created_time TIMESTAMP,
   date_created TIMESTAMP NOT NULL DEFAULT NOW(),
   PRIMARY KEY (comment_id)
@@ -261,4 +261,4 @@ CREATE UNLOGGED TABLE message (
     REFERENCES conversation (conversation_id)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
-);
+)
