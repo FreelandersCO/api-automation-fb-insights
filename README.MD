@@ -48,9 +48,9 @@ Para modificar los datos de conexión se debe hacer en el archivo `datab.py` en 
 
 | Variable | Dato|
 | ------ | ------ |
-| user| postgres |
-| password | 1nt3r4ct1v3 |
-| db | havas_automation |
+| user| **** |
+| password | *** |
+| db | **** |
 | host | localhost |
 | port | 5432|
 
