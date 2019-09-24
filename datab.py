@@ -9,9 +9,9 @@ class DatabaseOperation:
     def __init__(self):
         '''Returns a connection and a metadata object'''
         # We connect with the help of the PostgreSQL URL
-        user='sebas'
-        password='sebas901029'
-        db='havas_automation'
+        user=''
+        password=''
+        db=''
         host='localhost'
         port='5432'
         url = 'postgresql://{}:{}@{}:{}/{}'
