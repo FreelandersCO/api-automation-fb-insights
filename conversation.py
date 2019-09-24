@@ -1,7 +1,7 @@
 # Import system necesary library
 import sys, json, os, argparse, logging, time, requests, calendar, facebook, threading
 from datetime import datetime
-import pandas as pd
+#import pandas as pd
 from datab import DatabaseOperation
 VERSION = "3.1"
 
@@ -36,7 +36,7 @@ class ConversationApp(object):
         page_id = page_data.id_page
         page_token = page_data.token
         graph = facebook.GraphAPI(access_token=page_token, version=VERSION)
-        args = {'fields' : 'id,message_count,updated_time,link,messages.limit(100){id,from,message,sticker,created_time}','limit':25}  #requested fields
+        args = {'fields' : 'id,message_count,updated_time,link,messages.limit(100){id,from,message,sticker,created_time}','limit':499}  #requested fields
         conv = graph.get_object(page_id+'/conversations', **args)
         # print(conv)
         # Wrap this block in a while loop so we can keep paginating requests until
@@ -59,7 +59,6 @@ class ConversationApp(object):
                     else:
                         #No Existe
                         data_to_database = {}
-
                         data_to_database['conversation_id'] = conversation_id
                         data_to_database['id_page'] = page_id
                         data_to_database['link'] = mess['link']
@@ -68,9 +67,9 @@ class ConversationApp(object):
                         self.database.insert('conversation',data_to_database)
                         del data_to_database
                         self.message_process(conversation_id,mess['messages']['data'])
-                    # Attempt to make a request to the next page of data, if it exists.
-                    time.sleep(1)
-                    conv = requests.get(conv["paging"]["next"]).json()
+                # Attempt to make a request to the next page of data, if it exists.
+                time.sleep(1)
+                conv = requests.get(conv["paging"]["next"]).json()
             except KeyError:
                 # When there are no more pages (['paging']['next']), break from the
                 # loop and end the script.

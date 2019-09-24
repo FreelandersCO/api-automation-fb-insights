@@ -232,11 +232,11 @@ CREATE UNLOGGED TABLE IF NOT EXISTS post_comment_data (
 
 CREATE UNLOGGED TABLE conversation (
   conversation_id TEXT NOT NULL,
-  id_page TEXT NOT NULL,
-  message_count INT NOT NULL,
-  updated_time TEXT NOT NULL,
-  link TEXT NOT NULL,
-  date_created TIMESTAMP NOT NULL DEFAULT NOW(),
+  id_page TEXT,
+  message_count INT,
+  updated_time TIMESTAMP,,
+  link TEXT,
+  date_created TIMESTAMP,DEFAULT NOW(),
   PRIMARY KEY (conversation_id) ,
   CONSTRAINT fk_page_id_conversation
     FOREIGN KEY (id_page)
@@ -247,10 +247,10 @@ CREATE UNLOGGED TABLE conversation (
 
 CREATE UNLOGGED TABLE message (
   message_id TEXT NOT NULL,
-  conversation_id TEXT NOT NULL,
-  from_id TEXT NOT NULL,
-  from_email TEXT NOT NULL,
-  from_name TEXT NOT NULL,
+  conversation_id TEXT NULL,
+  from_id TEXT NULL,
+  from_email TEXT NULL,
+  from_name TEXT NULL,
   message TEXT NULL,
   sticker TEXT NULL,
   message_created_time TIMESTAMP NOT NULL,
@@ -261,4 +261,4 @@ CREATE UNLOGGED TABLE message (
     REFERENCES conversation (conversation_id)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
-)
+);
