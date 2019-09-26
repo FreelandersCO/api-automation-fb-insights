@@ -1188,13 +1188,13 @@ class PostApp(object):
         num_comments = 0
 
         if len(post_coments) > 0:
-            where_condition = "post_id='"+str(post_id)+ "'"
+            where_condition = post_id='+str(post_id)+ '
             self.database.delete('post_comment_data', where_condition)
 
         try :
             comments_data = post_data['comments']['data']
             for coment in comments_data:
-                if(coment['message'] != ""):
+                if(coment['message'] != ''):
                     data_to_database = {}
                     data_to_database['comment_id'] = coment['id']
                     data_to_database['post_id'] = post_id

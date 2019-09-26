@@ -3,7 +3,7 @@ import sys, json, os, argparse, logging, time, requests, calendar, facebook, thr
 from datetime import datetime
 #import pandas as pd
 from datab import DatabaseOperation
-VERSION = "3.1"
+VERSION = '3.1'
 
 def print_json(json_print):
     print(json.dumps(json_print, sort_keys=True, indent=4))
@@ -69,7 +69,7 @@ class ConversationApp(object):
                         self.message_process(conversation_id,mess['messages']['data'])
                 # Attempt to make a request to the next page of data, if it exists.
                 time.sleep(1)
-                conv = requests.get(conv["paging"]["next"]).json()
+                conv = requests.get(conv['paging'][next]).json()
             except KeyError:
                 # When there are no more pages (['paging']['next']), break from the
                 # loop and end the script.

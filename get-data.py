@@ -14,13 +14,13 @@ from postdata import PostApp
 DB = DatabaseOperation()
 
 # TODO: use the latest version available
-VERSION = "3.1"
+VERSION = '3.1'
 
 def remove_folder(path):
     if os.path.exists(path):
         shutil.rmtree(path)
     else:
-        print("No existe temp")
+        print('No existe temp')
 
 def run_page_thread(**page_data):
     page_data = page_data['page_data']
